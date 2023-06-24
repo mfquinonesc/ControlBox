@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GirosDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TCiudades">
+          <Key>
+            <PropertyRef Name="Ciudad_id" />
+          </Key>
+          <Property Name="Ciudad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pais_id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TGiros">
+          <Key>
+            <PropertyRef Name="Giro_id" />
+          </Key>
+          <Property Name="Giro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ciudad_id" Type="int" Nullable="false" />
+          <Property Name="Recibo" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TPaises">
+          <Key>
+            <PropertyRef Name="Pais_id" />
+          </Key>
+          <Property Name="Pais_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GirosDb.dbo.VCiudades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VCiudades">
+          <Key>
+            <PropertyRef Name="Pais_id" />
+            <PropertyRef Name="Ciudad_id" />
+          </Key>
+          <Property Name="Pais_id" Type="int" Nullable="false" />
+          <Property Name="NombrePais" Type="varchar" MaxLength="255" />
+          <Property Name="NombreCiudad" Type="varchar" MaxLength="255" />
+          <Property Name="Ciudad_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GirosDb.dbo.VGiros' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VGiros">
+          <Key>
+            <PropertyRef Name="Giro_id" />
+            <PropertyRef Name="Ciudad_id" />
+            <PropertyRef Name="Pais_id" />
+          </Key>
+          <Property Name="Giro_id" Type="int" Nullable="false" />
+          <Property Name="Ciudad_id" Type="int" Nullable="false" />
+          <Property Name="Recibo" Type="varchar" MaxLength="255" />
+          <Property Name="NombreCiudad" Type="varchar" MaxLength="255" />
+          <Property Name="Pais_id" Type="int" Nullable="false" />
+          <Property Name="NombrePais" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="fk_TCiudades_T">
+          <End Role="TCiudades" Type="Self.TCiudades" Multiplicity="1" />
+          <End Role="TGiros" Type="Self.TGiros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCiudades">
+              <PropertyRef Name="Ciudad_id" />
+            </Principal>
+            <Dependent Role="TGiros">
+              <PropertyRef Name="Ciudad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TPaises_TCiudades">
+          <End Role="TPaises" Type="Self.TPaises" Multiplicity="1" />
+          <End Role="TCiudades" Type="Self.TCiudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPaises">
+              <PropertyRef Name="Pais_id" />
+            </Principal>
+            <Dependent Role="TCiudades">
+              <PropertyRef Name="Pais_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GirosDbModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TCiudades" EntityType="Self.TCiudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TGiros" EntityType="Self.TGiros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TPaises" EntityType="Self.TPaises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VCiudades" EntityType="Self.VCiudades" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VCiudades].[Pais_id] AS [Pais_id], 
+    [VCiudades].[NombrePais] AS [NombrePais], 
+    [VCiudades].[NombreCiudad] AS [NombreCiudad], 
+    [VCiudades].[Ciudad_id] AS [Ciudad_id]
+    FROM [dbo].[VCiudades] AS [VCiudades]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VGiros" EntityType="Self.VGiros" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VGiros].[Giro_id] AS [Giro_id], 
+    [VGiros].[Ciudad_id] AS [Ciudad_id], 
+    [VGiros].[Recibo] AS [Recibo], 
+    [VGiros].[NombreCiudad] AS [NombreCiudad], 
+    [VGiros].[Pais_id] AS [Pais_id], 
+    [VGiros].[NombrePais] AS [NombrePais]
+    FROM [dbo].[VGiros] AS [VGiros]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_TCiudades_T" Association="Self.fk_TCiudades_T">
+            <End Role="TCiudades" EntitySet="TCiudades" />
+            <End Role="TGiros" EntitySet="TGiros" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TPaises_TCiudades" Association="Self.fk_TPaises_TCiudades">
+            <End Role="TPaises" EntitySet="TPaises" />
+            <End Role="TCiudades" EntitySet="TCiudades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GirosDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TCiudades">
+          <Key>
+            <PropertyRef Name="Ciudad_id" />
+          </Key>
+          <Property Name="Ciudad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pais_id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TGiros" Relationship="Self.fk_TCiudades_T" FromRole="TCiudades" ToRole="TGiros" />
+          <NavigationProperty Name="TPaises" Relationship="Self.fk_TPaises_TCiudades" FromRole="TCiudades" ToRole="TPaises" />
+        </EntityType>
+        <EntityType Name="TGiros">
+          <Key>
+            <PropertyRef Name="Giro_id" />
+          </Key>
+          <Property Name="Giro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ciudad_id" Type="Int32" Nullable="false" />
+          <Property Name="Recibo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TCiudades" Relationship="Self.fk_TCiudades_T" FromRole="TGiros" ToRole="TCiudades" />
+        </EntityType>
+        <EntityType Name="TPaises">
+          <Key>
+            <PropertyRef Name="Pais_id" />
+          </Key>
+          <Property Name="Pais_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TCiudades" Relationship="Self.fk_TPaises_TCiudades" FromRole="TPaises" ToRole="TCiudades" />
+        </EntityType>
+        <EntityType Name="VCiudades">
+          <Key>
+            <PropertyRef Name="Pais_id" />
+            <PropertyRef Name="Ciudad_id" />
+          </Key>
+          <Property Name="Pais_id" Type="Int32" Nullable="false" />
+          <Property Name="NombrePais" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCiudad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VGiros">
+          <Key>
+            <PropertyRef Name="Giro_id" />
+            <PropertyRef Name="Ciudad_id" />
+            <PropertyRef Name="Pais_id" />
+          </Key>
+          <Property Name="Giro_id" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad_id" Type="Int32" Nullable="false" />
+          <Property Name="Recibo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCiudad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Pais_id" Type="Int32" Nullable="false" />
+          <Property Name="NombrePais" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_TCiudades_T">
+          <End Role="TCiudades" Type="Self.TCiudades" Multiplicity="1" />
+          <End Role="TGiros" Type="Self.TGiros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCiudades">
+              <PropertyRef Name="Ciudad_id" />
+            </Principal>
+            <Dependent Role="TGiros">
+              <PropertyRef Name="Ciudad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TPaises_TCiudades">
+          <End Role="TPaises" Type="Self.TPaises" Multiplicity="1" />
+          <End Role="TCiudades" Type="Self.TCiudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPaises">
+              <PropertyRef Name="Pais_id" />
+            </Principal>
+            <Dependent Role="TCiudades">
+              <PropertyRef Name="Pais_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GirosDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TCiudades" EntityType="Self.TCiudades" />
+          <EntitySet Name="TGiros" EntityType="Self.TGiros" />
+          <EntitySet Name="TPaises" EntityType="Self.TPaises" />
+          <EntitySet Name="VCiudades" EntityType="Self.VCiudades" />
+          <EntitySet Name="VGiros" EntityType="Self.VGiros" />
+          <AssociationSet Name="fk_TCiudades_T" Association="Self.fk_TCiudades_T">
+            <End Role="TCiudades" EntitySet="TCiudades" />
+            <End Role="TGiros" EntitySet="TGiros" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TPaises_TCiudades" Association="Self.fk_TPaises_TCiudades">
+            <End Role="TPaises" EntitySet="TPaises" />
+            <End Role="TCiudades" EntitySet="TCiudades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GirosDbModelStoreContainer" CdmEntityContainer="GirosDbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GirosDbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TCiudades">
+            <EntityTypeMapping TypeName="GirosDbModel.TCiudades">
+              <MappingFragment StoreEntitySet="TCiudades">
+                <ScalarProperty Name="Ciudad_id" ColumnName="Ciudad_id" />
+                <ScalarProperty Name="Pais_id" ColumnName="Pais_id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TGiros">
+            <EntityTypeMapping TypeName="GirosDbModel.TGiros">
+              <MappingFragment StoreEntitySet="TGiros">
+                <ScalarProperty Name="Giro_id" ColumnName="Giro_id" />
+                <ScalarProperty Name="Ciudad_id" ColumnName="Ciudad_id" />
+                <ScalarProperty Name="Recibo" ColumnName="Recibo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TPaises">
+            <EntityTypeMapping TypeName="GirosDbModel.TPaises">
+              <MappingFragment StoreEntitySet="TPaises">
+                <ScalarProperty Name="Pais_id" ColumnName="Pais_id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VCiudades">
+            <EntityTypeMapping TypeName="GirosDbModel.VCiudades">
+              <MappingFragment StoreEntitySet="VCiudades">
+                <ScalarProperty Name="Pais_id" ColumnName="Pais_id" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+                <ScalarProperty Name="NombreCiudad" ColumnName="NombreCiudad" />
+                <ScalarProperty Name="Ciudad_id" ColumnName="Ciudad_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VGiros">
+            <EntityTypeMapping TypeName="GirosDbModel.VGiros">
+              <MappingFragment StoreEntitySet="VGiros">
+                <ScalarProperty Name="Giro_id" ColumnName="Giro_id" />
+                <ScalarProperty Name="Ciudad_id" ColumnName="Ciudad_id" />
+                <ScalarProperty Name="Recibo" ColumnName="Recibo" />
+                <ScalarProperty Name="NombreCiudad" ColumnName="NombreCiudad" />
+                <ScalarProperty Name="Pais_id" ColumnName="Pais_id" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
