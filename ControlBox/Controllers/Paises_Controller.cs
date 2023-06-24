@@ -9,8 +9,7 @@ using System.Web;
 namespace ControlBox.Controllers
 {
     public class Paises_Controller
-    {
-        public Paises_Controller() { }
+    {   
         public List<TPaises> Read()
         {
             List<TPaises> paises= new List<TPaises>();

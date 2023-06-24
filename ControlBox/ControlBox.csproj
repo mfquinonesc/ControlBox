@@ -183,6 +183,9 @@
     <Content Include="Views\Ciudades\Ciudades.aspx" />
     <Content Include="Views\Ciudades\Create.aspx" />
     <Content Include="Views\Ciudades\Edit.aspx" />
+    <Content Include="Views\Giros\Create.aspx" />
+    <Content Include="Views\Giros\Edit.aspx" />
+    <Content Include="Views\Giros\Giros.aspx" />
     <Content Include="Views\Paises\Create.aspx" />
     <Content Include="Views\Paises\Edit.aspx" />
     <Content Include="Views\Paises\Paises.aspx" />
@@ -208,6 +211,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Ciudades_Controller.cs" />
+    <Compile Include="Controllers\Giros_Controller.cs" />
     <Compile Include="Controllers\Paises_Controller.cs" />
     <Compile Include="DB\DB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -298,6 +302,27 @@
     <Compile Include="Views\Ciudades\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Giros\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Giros\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Giros\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Giros\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Giros\Giros.aspx.cs">
+      <DependentUpon>Giros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Giros\Giros.aspx.designer.cs">
+      <DependentUpon>Giros.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Paises\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -322,7 +347,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Giros\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

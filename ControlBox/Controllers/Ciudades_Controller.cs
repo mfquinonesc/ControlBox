@@ -45,6 +45,19 @@ namespace ControlBox.Controllers
             }
             return ciudad;
         }
+        public List<TCiudades> Read(TPaises pais)
+        {
+            List<TCiudades> list = new List<TCiudades>();
+            using (GirosDbEntities db = new GirosDbEntities())
+            {
+                var vlist = from c in db.TCiudades
+                            where c.Pais_id == pais.Pais_id
+                            select c;
+                list = vlist.ToList();                
+                
+            }
+            return list;
+        }
         public void Create(TCiudades ciudad)
         {
             using (GirosDbEntities db = new GirosDbEntities())
