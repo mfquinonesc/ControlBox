@@ -3,6 +3,7 @@
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" OnLoad="UpdatePanel1_Load" UpdateMode="Conditional">
         <ContentTemplate>
+           <h1 class="display-4">Ciudades</h1>
             <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped" DataKeyNames="Ciudad_id" 
                 AutoGenerateColumns="false" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
                 OnRowDeleting="GridView1_RowDeleting" >

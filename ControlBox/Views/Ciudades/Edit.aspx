@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
       <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" OnLoad="UpdatePanel1_Load" UpdateMode="Conditional">
-        <ContentTemplate> 
+        <ContentTemplate>
+            <h1 class="display-4">Ciudades</h1>
             <div class="form-group">
                 <label for="txtId">ID Pais</label>
                 <asp:TextBox ID="txtId" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
