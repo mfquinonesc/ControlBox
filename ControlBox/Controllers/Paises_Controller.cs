@@ -65,21 +65,7 @@ namespace ControlBox.Controllers
                 db.SaveChanges();
             }
         }   
-        
-        public DataTable ConvertToDataTable(List<TPaises> list)
-        {
-            DataTable table = new DataTable();
-            table.Columns.Add("ID");
-            table.Columns.Add("Nombre");  
-            foreach(TPaises paises in list)
-            {
-                DataRow dataRow= table.NewRow();
-                dataRow["ID"] = paises.Pais_id;
-                dataRow["Nombre"] = paises.Nombre;
-                table.Rows.Add(dataRow);
-            } 
-            return table;
-        }
+       
 
     }
 }

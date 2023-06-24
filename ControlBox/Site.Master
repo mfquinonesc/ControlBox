@@ -31,6 +31,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Views/Paises/Paises.aspx">Paises</a></li>
+                        <li><a runat="server" href="~/Views/Ciudades/Ciudades.aspx">Ciudades</a></li>
                     </ul>
                 </div>
             </div>

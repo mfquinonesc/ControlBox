@@ -181,6 +181,8 @@
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\Ciudades\Ciudades.aspx" />
+    <Content Include="Views\Ciudades\Create.aspx" />
+    <Content Include="Views\Ciudades\Edit.aspx" />
     <Content Include="Views\Paises\Create.aspx" />
     <Content Include="Views\Paises\Edit.aspx" />
     <Content Include="Views\Paises\Paises.aspx" />
@@ -205,6 +207,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Ciudades_Controller.cs" />
     <Compile Include="Controllers\Paises_Controller.cs" />
     <Compile Include="DB\DB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -280,6 +283,20 @@
     </Compile>
     <Compile Include="Views\Ciudades\Ciudades.aspx.designer.cs">
       <DependentUpon>Ciudades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ciudades\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Ciudades\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ciudades\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Ciudades\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Paises\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>

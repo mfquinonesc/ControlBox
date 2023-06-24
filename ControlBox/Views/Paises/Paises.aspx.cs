@@ -13,7 +13,7 @@ namespace ControlBox.Views.Paises
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Paises_Controller controller = new Paises_Controller();
+            Ciudades_Controller controller = new Ciudades_Controller();
             this.GridView1.DataSource = controller.Read();
             this.GridView1.DataBind();  
         }
@@ -32,7 +32,7 @@ namespace ControlBox.Views.Paises
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {           
             int id = Convert.ToInt32(((GridView)sender).Rows[e.RowIndex].Cells[2].Text);
-            Paises_Controller controller = new Paises_Controller();
+            Ciudades_Controller controller = new Ciudades_Controller();
             controller.Delete(id);
             Response.Redirect("~/Views/Paises/Paises.aspx", false);
         }       
